@@ -4,7 +4,7 @@ import time
 import json
 import pickle
 import secrets
-
+from gpiozero import Robot
 import os
 import sys
 
@@ -26,13 +26,29 @@ class RobotServer(Logger):
         self.notif_p.terminate()
         self.notif_p.join()
 
+    def do_voice_cmd(self, cmd):
+        if "straight" in cmd:
+            self.robot.forward()
+        elif "back" in cmd:
+            self.robot.backward()
+        elif "right" in cmd:
+            self.robot.right()
+        elif "left" in cmd:
+            self.robot.left()
+        elif "stop" in cmd:
+            self.robot.stop()
 
-    def main_loop(self, sleep_time=0.2):
+
+    def main_loop(self, sleep_time=0.05):
         try:
+            self.robot = Robot(left=(4, 14), right=(17, 18))
             while True:
                 if not self.notif_q.empty():
                     item = json.loads(self.notif_q.get())
                     self.logger.debug(f"Notification Q:\n{item}")
+                    if item.get("type") == "voice":
+                        self.do_voice_cmd(item.get("content"))
+
                 time.sleep(sleep_time)
         except KeyboardInterrupt:
             exit(0)

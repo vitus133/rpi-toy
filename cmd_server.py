@@ -10,10 +10,18 @@ CHECK_TIM = 0.2
 @post('/voice_command')
 def command_handler():
     global q
-    # Stupid appinventor web client only sends "text" or "file",
-    # not application/json
     j = {
             "type": "voice",
+            "content": request.body.read().decode()
+    }
+    q.put(json.dumps(j, indent=2))
+
+
+@post('/scan_result')
+def command_handler():
+    global q
+    j = {
+            "type": "scan",
             "content": request.body.read().decode()
     }
     q.put(json.dumps(j, indent=2))
