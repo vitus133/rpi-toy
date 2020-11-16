@@ -1,0 +1,17 @@
+Adafruit-Blinka==5.7.0
+adafruit-circuitpython-busdevice==5.0.1
+adafruit-circuitpython-lis3dh==5.1.5
+adafruit-circuitpython-vl6180x==1.2.3
+Adafruit-PlatformDetect==2.21.0
+Adafruit-PureIO==1.1.7
+bottle==0.12.18
+colorzero==1.1
+gpiozero==1.5.1
+pigpio==1.78
+pkg-resources==0.0.0
+pyftdi==0.52.0
+pyserial==3.4
+pyusb==1.1.0
+rpi-ws281x==4.2.5
+RPi.GPIO==0.7.0
+sysv-ipc==1.0.1
